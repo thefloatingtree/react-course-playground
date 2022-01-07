@@ -1,13 +1,18 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist()
 
 export const todoListState = atom({
     key: 'todoListState',
     default: [],
+    effects_UNSTABLE: [persistAtom]
   });
 
 export const selectedDayState = atom({
   key: 'selectedDayState',
-  default: (new Date()).toLocaleDateString()
+  default: (new Date()).toLocaleDateString(),
+  effects_UNSTABLE: [persistAtom]
 })
 
 export const filteredTodoListState = selector({
