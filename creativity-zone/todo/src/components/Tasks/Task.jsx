@@ -19,7 +19,7 @@ export default function Task({ task }) {
     }
 
     const onDelete = () => {
-        const updatedTodos = todos.filter((todo, i) => {
+        const updatedTodos = todos.filter((_, i) => {
             return index !== i
         })
 
@@ -29,7 +29,7 @@ export default function Task({ task }) {
     return <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3 cursor-pointer" onClick={onChecked}>
             <Checkbox checked={task.checked}></Checkbox>
-            <p className={"font-semibold transition-all " + (task.checked ? "text-gray-900" : "text-gray-400")}>{task.content}</p>
+            <p className={"font-semibold transition-all " + (task.checked ? "text-gray-950" : "text-gray-300")}>{task.content}</p>
         </div>
         <TrashIcon className="text-gray-900 hover:text-red-500 cursor-pointer transition-all" onClick={onDelete}></TrashIcon>
     </div>
