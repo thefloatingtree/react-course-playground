@@ -7,10 +7,12 @@ export default function ExpenseForm({ onSubmit }) {
     const [amount, setAmount] = useState('')
     const [date, setDate] = useState('')
 
+    const [showForm, setShowForm] = useState(false)
+
     const titleChangeHandler = (event) => {
         setTitle(event.target.value)
     }
-    
+
     const amountChangeHandler = (event) => {
         setAmount(event.target.value)
     }
@@ -32,7 +34,12 @@ export default function ExpenseForm({ onSubmit }) {
         setAmount('')
         setDate('')
 
+        setShowForm(false)
         onSubmit(formData)
+    }
+
+    if (!showForm) {
+        return <button onClick={() => setShowForm(true)}>Add New Expense</button>
     }
 
     return (
@@ -52,6 +59,7 @@ export default function ExpenseForm({ onSubmit }) {
                 </div>
             </div>
             <div className="new-expense__actions">
+                <button onClick={() => setShowForm(false)}>Cancel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>
