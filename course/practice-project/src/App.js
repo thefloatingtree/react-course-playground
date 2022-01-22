@@ -5,12 +5,12 @@ import UserList from "./components/UserList";
 
 function App() {
 
-  const [users, setUsers] = useState([{ name: "Horse", age: 24 }]);
+  const [users, setUsers] = useState([]);
 
   return (
     <Stack>
-      <Form />
-      <UserList users={users} />
+      <Form onSubmit={user => setUsers(prev => [user, ...prev])} />
+      {users.length && <UserList users={users} />}
     </Stack>
   );
 }
