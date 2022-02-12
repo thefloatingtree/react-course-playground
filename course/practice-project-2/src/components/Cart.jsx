@@ -1,13 +1,17 @@
 import { Button, Divider, Heading, HStack, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react"
 import { useAtom } from "jotai"
+import { useState } from "react"
 import { cartTotalAtom, cartCountAtom } from "../store/store"
 import CartMealList from "./CartMealList"
+import Checkout from "./Checkout"
 
 
 export default function Cart({ isOpen, onClose }) {
 
     const [cartTotal] = useAtom(cartTotalAtom)
     const [cartCount] = useAtom(cartCountAtom)
+
+    const [showCheckout, setShowCheckout] = useState(false)
 
     let Body = (
         <>
@@ -35,14 +39,16 @@ export default function Cart({ isOpen, onClose }) {
                     <ModalBody>
 
                         {Body}
+                        {showCheckout && <Checkout />}
 
                     </ModalBody>
                     <ModalFooter>
                         <HStack spacing={3}>
-                            <Button variant='ghost' onClick={onClose}>
+                            {showCheckout && <Button onClick={() => setShowCheckout(false)}>Cancel</Button>}
+                            {!showCheckout && <Button variant='ghost' onClick={onClose}>
                                 Close
-                            </Button>
-                            {!!cartCount && <Button onClick={() => console.log("ORDER")} colorScheme={'blue'}>Order</Button>}
+                            </Button>}
+                            {!showCheckout && !!cartCount && <Button onClick={() => setShowCheckout(true)} colorScheme={'blue'}>Order</Button>}
                         </HStack>
                     </ModalFooter>
                 </ModalContent>

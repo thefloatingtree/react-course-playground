@@ -1,4 +1,5 @@
 import { Box, Heading, HStack, VStack, Image, Text } from "@chakra-ui/react";
+import { Suspense } from "react";
 import MealList from "./components/MealList";
 import Nav from "./components/Nav";
 
@@ -17,7 +18,9 @@ function App() {
         </Box>
       </HStack>
       <HStack justify={'center'} my={'5rem'}>
-        <MealList />
+        <Suspense fallback="Loading...">
+          <MealList />
+        </Suspense>
       </HStack>
     </>
   );
